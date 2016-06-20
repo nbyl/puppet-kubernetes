@@ -12,39 +12,36 @@ class kubernetes::addons::updater {
     }
   }
   package{ $pyyaml_package:
-    ensure => installed
+    ensure => installed,
   }
 
   file{ '/etc/kubernetes/addons':
-    ensure => directory
+    ensure => directory,
   }
 
   file{ '/usr/local/bin/kubectl':
     ensure => 'link',
-    target => '/bin/kubectl'
+    target => '/bin/kubectl',
   }
 
   file{ '/etc/kubernetes/kube-addon-update.sh':
-    ensure  => present,
     content => template("${module_name}/etc/kubernetes/kube-addon-update.sh"),
-    mode    => 755,
-    require => Package[$pyyaml_package]
+    mode    => '0755',
+    require => Package[$pyyaml_package],
   }
 
   file{ '/etc/kubernetes/kube-addons.sh':
-    ensure  => present,
     content => template("${module_name}/etc/kubernetes/kube-addons.sh"),
-    mode    => 755
+    mode    => '0755',
   }
 
   file{ '/usr/lib/systemd/system/kube-addons.service':
-    ensure  => present,
     content => template("${module_name}/systemd/kube-addons.service.erb"),
   }
 
   service { 'kube-addons':
     ensure  => running,
     enable  => true,
-    require => File['/usr/lib/systemd/system/kube-addons.service']
+    require => File['/usr/lib/systemd/system/kube-addons.service'],
   }
 }
