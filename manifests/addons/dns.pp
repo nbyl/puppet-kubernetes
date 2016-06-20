@@ -7,7 +7,8 @@ class kubernetes::addons::dns (
   include kubernetes::addons::namespace
 
   file{ '/etc/kubernetes/addons/dns':
-    ensure => directory
+    ensure  => directory,
+    require => File['/etc/kubernetes/addons']
   }
 
   kubernetes::addons::addon{ 'dns-rc':
