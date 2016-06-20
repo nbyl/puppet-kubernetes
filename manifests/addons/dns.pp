@@ -1,8 +1,16 @@
 # == Class: kubernetes::addons::dns
 #
 # [*dns_replicas*]
-#   Whether you want the apiserver daemon to start up
-#   Defaults to running
+#   The number of replicas, that should be run.
+#   default: 1
+#
+# [*dns_domain*]
+#   The domain to use a base for all hostnames.
+#   default: cluster.local
+#
+# [*dns_server*]
+#   The IP address that should be assigned to the DNS server.
+#   default: 10.0.0.10
 #
 class kubernetes::addons::dns (
   $dns_replicas = $kubernetes::master::params::dns_replicas,
