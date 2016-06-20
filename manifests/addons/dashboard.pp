@@ -1,5 +1,5 @@
 class kubernetes::addons::dashboard {
-  include ::base
+  include ::kubernetes::addons::base
 
   file{ '/etc/kubernetes/addons/dashboard':
     ensure  => directory,

@@ -1,7 +1,7 @@
 class kubernetes::addons::base {
-  include ::updater
+  include ::kubernetes::addons::updater
 
-  class { '::namespace':
-    require => Class['::updater'],
+  class { '::kubernetes::addons::namespace':
+    require => Class['::kubernetes::addons::updater'],
   }
 }

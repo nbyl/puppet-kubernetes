@@ -17,7 +17,7 @@ class kubernetes::addons::dns (
   $dns_domain   = $kubernetes::master::params::dns_domain,
   $dns_server   = $kubernetes::master::params::dns_server
 ) {
-  include ::base
+  include ::kubernetes::addons::base
 
   file{ '/etc/kubernetes/addons/dns':
     ensure  => directory,
